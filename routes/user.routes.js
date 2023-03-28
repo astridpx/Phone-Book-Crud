@@ -9,6 +9,17 @@ router.get("/", async (req, res) => {
     .catch((err) => res.status(400).json(err));
 });
 
+router.get("/:id", async (req, res) => {
+  await User.findById(req.params.id)
+    .then((user) => {
+      res.json(user);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(400).json(err);
+    });
+});
+
 router.post("/add/user", async (req, res) => {
   const name = req.body.name;
   const address = req.body.address;
